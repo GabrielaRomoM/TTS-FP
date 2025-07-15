@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include "conf_asst.h"
 
-#define BTN1 0  // GPIO17 → idioma / pausa / repetir
-#define BTN2 2  // GPIO27 → velocidad / terminar / nueva configuración
-#define BTN3 3  // GPIO22 → confirmar / sin uso / sin uso
+#define BTN1 0  // GPIO17 
+#define BTN2 2  // GPIO27 
+#define BTN3 3  // GPIO22 
 
 const char* idiomas[] = {"mb-es2", "mb-en1"};
 const char* idiomas_mostrar[] = {"Español", "Inglés"};
