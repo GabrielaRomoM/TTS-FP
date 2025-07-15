@@ -26,9 +26,9 @@ void run_config_assistant(void) {
     pinMode(BTN_SPEED, INPUT);
     pinMode(BTN_OK, INPUT);
 
-    pullUpDnControl(BTN_LANG, PUD_DOWN);
-    pullUpDnControl(BTN_SPEED, PUD_DOWN);
-    pullUpDnControl(BTN_OK, PUD_DOWN);
+    pullUpDnControl(BTN_LANG, PUD_UP);
+    pullUpDnControl(BTN_SPEED, PUD_UP);
+    pullUpDnControl(BTN_OK, PUD_UP);
 
     char path[256];
     int idioma_idx = 0;
