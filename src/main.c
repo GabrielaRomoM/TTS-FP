@@ -13,7 +13,7 @@ extern void stop_speech(void);
 #define BTN_PAUSE   4   // GPIO23
 #define BTN_STOP    5   // GPIO24
 #define BTN_REPEAT  6   // GPIO25
-#define BTN_RECONF  7   // GPIO26
+#define BTN_RECONF  28   // GPIO20
 
 extern pid_t espeak_pid;
 
