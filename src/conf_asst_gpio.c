@@ -1,22 +1,35 @@
 #include <stdio.h>
 #include <wiringPi.h>
 #include <string.h>
-#include <unistd.h>
-#include "conf_asst.h"
+#include "conf_asst_gpio.h"
 
-#define BTN_LANG 0     // GPIO17 -> wiringPi 0
-#define BTN_SPEED 2    // GPIO27 -> wiringPi 2
-#define BTN_OK 3       // GPIO22 -> wiringPi 3
+#define BTN_LANG  0   // GPIO17
+#define BTN_SPEED 2   // GPIO27
+#define BTN_OK    3   // GPIO22
 
 const char* idiomas[] = {"mb-es2", "mb-en1"};
 const char* idiomas_mostrar[] = {"Español", "Inglés"};
 int speeds[] = {100, 125, 150, 175, 200};
 
-void wait_for_button_press(int pin) {
-    while (digitalRead(pin) == LOW)
+int wait_for_button_press() {
+    while (1) {
+        if (digitalRead(BTN_LANG) == LOW) {
+            delay(50);
+            while (digitalRead(BTN_LANG) == LOW);
+            return BTN_LANG;
+        }
+        if (digitalRead(BTN_SPEED) == LOW) {
+            delay(50);
+            while (digitalRead(BTN_SPEED) == LOW);
+            return BTN_SPEED;
+        }
+        if (digitalRead(BTN_OK) == LOW) {
+            delay(50);
+            while (digitalRead(BTN_OK) == LOW);
+            return BTN_OK;
+        }
         delay(10);
-    while (digitalRead(pin) == HIGH)
-        delay(10); // Esperar que se suelte
+    }
 }
 
 void run_config_assistant(void) {
@@ -41,31 +54,28 @@ void run_config_assistant(void) {
     printf("Usa los botones para cambiar opciones. Pulsa OK para confirmar.\n");
 
     while (1) {
-        printf("\nIdioma: %s | Velocidad: %d\n", idiomas_mostrar[idioma_idx], speeds[speed_idx]);
+        system("clear");
+        printf("\n=== Asistente de configuración física ===\n");
+        printf("Ruta: %s\n", path);
+        printf("Idioma: %s | Velocidad: %d\n", idiomas_mostrar[idioma_idx], speeds[speed_idx]);
+        printf("Presiona un botón...\n");
 
-        if (digitalRead(BTN_LANG)) {
-            idioma_idx = (idioma_idx + 1) % 2;
-            wait_for_button_press(BTN_LANG);
-        }
+        int btn = wait_for_button_press();
 
-        if (digitalRead(BTN_SPEED)) {
+        if (btn == BTN_LANG) {
+            idioma_idx = 1 - idioma_idx;  // alternar 0 <-> 1
+        } else if (btn == BTN_SPEED) {
             speed_idx = (speed_idx + 1) % 5;
-            wait_for_button_press(BTN_SPEED);
-        }
-
-        if (digitalRead(BTN_OK)) {
-            wait_for_button_press(BTN_OK);
+        } else if (btn == BTN_OK) {
             break;
         }
-
-        delay(100);
     }
 
     FILE *file = fopen("tts.conf", "w");
     if (file) {
         fprintf(file, "path=%s\nlanguage=%s\nspeed=%d\n", path, idiomas[idioma_idx], speeds[speed_idx]);
         fclose(file);
-        printf("Configuración guardada exitosamente.\n");
+        printf("\nConfiguración guardada exitosamente.\n");
     } else {
         perror("Error al guardar configuración");
     }
