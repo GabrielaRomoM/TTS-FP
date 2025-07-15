@@ -2,6 +2,7 @@
 #include <wiringPi.h>
 #include <string.h>
 #include "conf_asst_gpio.h"
+#include <stdlib.h>
 
 #define BTN_LANG  0   // GPIO17
 #define BTN_SPEED 2   // GPIO27
@@ -47,18 +48,19 @@ void run_config_assistant(void) {
     int idioma_idx = 0;
     int speed_idx = 0;
 
-    printf("\n=== Asistente de configuración física ===\n");
-    printf("Ingrese la ruta del archivo .txt: ");
+    printf("\n=== Asistente de configuración ===\n");
+    printf("Ingrese el nombre o ruta del archivo .txt: ");
     scanf(" %255[^\n]", path);
 
-    printf("Usa los botones para cambiar opciones. Pulsa OK para confirmar.\n");
+    printf("Usa los botones para cambiar opciones. OK para confirmar.\n");
 
     while (1) {
         system("clear");
-        printf("\n=== Asistente de configuración física ===\n");
-        printf("Ruta: %s\n", path);
-        printf("Idioma: %s | Velocidad: %d\n", idiomas_mostrar[idioma_idx], speeds[speed_idx]);
-        printf("Presiona un botón...\n");
+        printf("\n=== Asistente de configuración ===\n");
+        printf("Archivo: %s\n", path);
+        printf("Idioma: %s", idiomas_mostrar[idioma_idx]);
+	printf("\nVelocidad: %d\n", speeds[speed_idx]); 
+	printf("Presiona Ok para guardar la configuración.\n");
 
         int btn = wait_for_button_press();
 
