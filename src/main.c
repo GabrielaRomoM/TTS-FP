@@ -1,21 +1,25 @@
 #include <wiringPi.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <signal.h>
 #include "conf_asst.h"
 #include "config.h"
 #include "loader.h"
 #include "conv_tts.h"
-#include <signal.h>
-#include <unistd.h>
 
+extern pid_t espeak_pid;
 extern int is_speaking(void);
 extern void stop_speech(void);
 
-#define BTN_PAUSE   4   // GPIO23
-#define BTN_STOP    5   // GPIO24
-#define BTN_REPEAT  6   // GPIO25
-#define BTN_RECONF  28   // GPIO20
+// Pines físicos según tu asignación
+#define BTN_1 0  // GPIO17 - wiringPi 0
+#define BTN_2 2  // GPIO27 - wiringPi 2
+#define BTN_3 3  // GPIO22 - wiringPi 3
 
-extern pid_t espeak_pid;
+void esperar_suelta(int pin) {
+    delay(200);
+    while (digitalRead(pin) == LOW);
+}
 
 int main() {
     Config config;
@@ -30,15 +34,12 @@ int main() {
     }
 
     wiringPiSetup();
-    pinMode(BTN_PAUSE, INPUT);
-    pinMode(BTN_STOP, INPUT);
-    pinMode(BTN_REPEAT, INPUT);
-    pinMode(BTN_RECONF, INPUT);
-
-    pullUpDnControl(BTN_PAUSE, PUD_UP);
-    pullUpDnControl(BTN_STOP, PUD_UP);
-    pullUpDnControl(BTN_REPEAT, PUD_UP);
-    pullUpDnControl(BTN_RECONF, PUD_UP);
+    pinMode(BTN_1, INPUT);
+    pinMode(BTN_2, INPUT);
+    pinMode(BTN_3, INPUT);
+    pullUpDnControl(BTN_1, PUD_UP);
+    pullUpDnControl(BTN_2, PUD_UP);
+    pullUpDnControl(BTN_3, PUD_UP);
 
     int repetir = 0;
 
@@ -54,15 +55,14 @@ int main() {
         for (int i = 0; i < line_count; ++i) {
             speak_line(text[i], config.language, config.speed);
             while (is_speaking()) {
-                if (digitalRead(BTN_STOP) == LOW) {
+                if (digitalRead(BTN_2) == LOW) {  // Detener
                     stop_speech();
                     printf(">> Reproducción detenida\n");
                     goto fin_reproduccion;
                 }
 
-                if (digitalRead(BTN_PAUSE) == LOW) {
-                    delay(200);
-                    while (digitalRead(BTN_PAUSE) == LOW);
+                if (digitalRead(BTN_1) == LOW) {  // Pausar / Reanudar
+                    esperar_suelta(BTN_1);
                     paused = !paused;
                     if (paused) {
                         printf(">> Pausado\n");
@@ -72,6 +72,7 @@ int main() {
                         kill(espeak_pid, SIGCONT);
                     }
                 }
+
                 delay(100);
             }
         }
@@ -79,28 +80,34 @@ int main() {
     fin_reproduccion:
         free_text(text, line_count);
 
-        printf("\n=== FIN ===\n");
-        printf("BTN_REPEAT (GPIO25) → Repetir audio\n");
-        printf("BTN_RECONF (GPIO20) → Nuevo audio\n");
+        printf("\n=== FIN DE REPRODUCCIÓN ===\n");
+        printf("BTN_1 (GPIO17): Repetir\n");
+        printf("BTN_2 (GPIO27): Nuevo archivo/configuración\n");
+        printf("BTN_3 (GPIO22): Salir\n");
 
         repetir = 0;
+
         while (1) {
-            if (digitalRead(BTN_REPEAT) == LOW) {
-                delay(200);
-                while (digitalRead(BTN_REPEAT) == LOW);
+            if (digitalRead(BTN_1) == LOW) {  // Repetir
+                esperar_suelta(BTN_1);
                 repetir = 1;
                 break;
             }
 
-            if (digitalRead(BTN_RECONF) == LOW) {
-                delay(200);
-                while (digitalRead(BTN_RECONF) == LOW);
+            if (digitalRead(BTN_2) == LOW) {  // Nueva configuración
+                esperar_suelta(BTN_2);
                 run_config_assistant();
                 if (load_config(&config) != 0) {
-                    printf("Error al leer la nueva configuración.\n");
+                    printf("Error al leer nueva configuración.\n");
                     return 1;
                 }
                 repetir = 1;
+                break;
+            }
+
+            if (digitalRead(BTN_3) == LOW) {  // Salir del programa
+                esperar_suelta(BTN_3);
+                repetir = 0;
                 break;
             }
 
@@ -109,5 +116,6 @@ int main() {
 
     } while (repetir);
 
+    printf("Hasta luego.\n");
     return 0;
 }
