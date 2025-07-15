@@ -1,6 +1,10 @@
 #include <wiringPi.h>
+#include <stdio.h>       
+#include "conf_asst.h"
+#include "config.h"
+#include "loader.h"
+#include "conv_tts.h"
 
-// Define botones (usando wiringPi numbering)
 #define BTN_PAUSE  4  // GPIO23
 #define BTN_NEXT   5  // GPIO24
 #define BTN_STOP   6  // GPIO25
