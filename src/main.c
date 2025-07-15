@@ -7,6 +7,9 @@
 #include <signal.h>     // Para SIGSTOP, SIGCONT
 #include <unistd.h>     // Para pid_t
 
+int is_speaking(void);
+void stop_speech(void);
+
 #define BTN_PAUSE  4  // GPIO23
 #define BTN_STOP   6  // GPIO25
 extern pid_t espeak_pid;
