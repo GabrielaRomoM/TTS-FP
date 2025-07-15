@@ -1,13 +1,12 @@
 #include <wiringPi.h>
-#include <stdio.h>       
+#include <stdio.h>
 #include "conf_asst.h"
 #include "config.h"
 #include "loader.h"
 #include "conv_tts.h"
 
 #define BTN_PAUSE  4  // GPIO23
-#define BTN_NEXT   5  // GPIO24
-#define BTN_STOP   6  // GPIO25
+#define BTN_STOP   5  // GPIO24
 
 int main() {
     Config config;
@@ -28,24 +27,22 @@ int main() {
         return 1;
     }
 
-    // Configura botones
+    // Configurar botones
     wiringPiSetup();
     pinMode(BTN_PAUSE, INPUT);
-    pinMode(BTN_NEXT, INPUT);
     pinMode(BTN_STOP, INPUT);
     pullUpDnControl(BTN_PAUSE, PUD_UP);
-    pullUpDnControl(BTN_NEXT, PUD_UP);
     pullUpDnControl(BTN_STOP, PUD_UP);
 
     int paused = 0;
 
     for (int i = 0; i < line_count; ++i) {
         while (1) {
-            // Si está pausado, espera hasta reanudar
+            // Si está pausado
             if (paused) {
                 if (digitalRead(BTN_PAUSE) == LOW) {
                     delay(200);
-                    while (digitalRead(BTN_PAUSE) == LOW);  // espera suelta
+                    while (digitalRead(BTN_PAUSE) == LOW);
                     paused = 0;
                     printf(">> Reanudado\n");
                 }
@@ -57,7 +54,7 @@ int main() {
                 continue;
             }
 
-            // Si no está pausado, verifica si se pausa
+            // Verifica si se pausa
             if (digitalRead(BTN_PAUSE) == LOW) {
                 delay(200);
                 while (digitalRead(BTN_PAUSE) == LOW);
@@ -72,15 +69,7 @@ int main() {
                 goto end;
             }
 
-            // Verifica si se salta
-            if (digitalRead(BTN_NEXT) == LOW) {
-                delay(200);
-                while (digitalRead(BTN_NEXT) == LOW);
-                printf(">> Siguiente línea\n");
-                break;  // salta a siguiente línea
-            }
-
-            // Reproduce la línea actual
+            // Reproduce línea actual
             speak_line(text[i], config.language, config.speed);
             break;
         }
