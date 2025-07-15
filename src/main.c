@@ -4,9 +4,12 @@
 #include "config.h"
 #include "loader.h"
 #include "conv_tts.h"
+#include <signal.h>     // Para SIGSTOP, SIGCONT
+#include <unistd.h>     // Para pid_t
 
 #define BTN_PAUSE  4  // GPIO23
 #define BTN_STOP   6  // GPIO25
+extern pid_t espeak_pid;
 
 int main() {
     Config config;
