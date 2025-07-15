@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <wiringPi.h>
 #include <string.h>
-#include "conf_asst_gpio.h"
+#include "conf_asst.h"
 #include <stdlib.h>
 
 #define BTN_LANG  0   // GPIO17
