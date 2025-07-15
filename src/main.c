@@ -11,7 +11,7 @@ int is_speaking(void);
 void stop_speech(void);
 
 #define BTN_PAUSE  4  // GPIO23
-#define BTN_STOP   6  // GPIO25
+#define BTN_STOP   5  // GPIO24
 extern pid_t espeak_pid;
 
 int main() {
