@@ -7,6 +7,9 @@
 #include <signal.h>
 #include <unistd.h>
 
+extern int is_speaking(void);
+extern void stop_speech(void);
+
 #define BTN_PAUSE   4   // GPIO23
 #define BTN_STOP    5   // GPIO24
 #define BTN_REPEAT  6   // GPIO25
