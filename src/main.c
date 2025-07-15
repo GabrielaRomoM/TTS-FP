@@ -6,7 +6,7 @@
 #include "conv_tts.h"
 
 #define BTN_PAUSE  4  // GPIO23
-#define BTN_STOP   5  // GPIO24
+#define BTN_STOP   6  // GPIO25
 
 int main() {
     Config config;
@@ -27,7 +27,7 @@ int main() {
         return 1;
     }
 
-    // Configurar botones
+    // Configura botones
     wiringPiSetup();
     pinMode(BTN_PAUSE, INPUT);
     pinMode(BTN_STOP, INPUT);
@@ -37,41 +37,30 @@ int main() {
     int paused = 0;
 
     for (int i = 0; i < line_count; ++i) {
-        while (1) {
-            // Si está pausado
-            if (paused) {
-                if (digitalRead(BTN_PAUSE) == LOW) {
-                    delay(200);
-                    while (digitalRead(BTN_PAUSE) == LOW);
-                    paused = 0;
-                    printf(">> Reanudado\n");
-                }
-                if (digitalRead(BTN_STOP) == LOW) {
-                    printf(">> Reproducción detenida\n");
-                    goto end;
-                }
-                delay(100);
-                continue;
-            }
+        speak_line(text[i], config.language, config.speed);
 
-            // Verifica si se pausa
-            if (digitalRead(BTN_PAUSE) == LOW) {
-                delay(200);
-                while (digitalRead(BTN_PAUSE) == LOW);
-                paused = 1;
-                printf(">> Pausado\n");
-                continue;
-            }
-
-            // Verifica si se detiene
+        while (is_speaking()) {
             if (digitalRead(BTN_STOP) == LOW) {
+                stop_speech();
                 printf(">> Reproducción detenida\n");
                 goto end;
             }
 
-            // Reproduce línea actual
-            speak_line(text[i], config.language, config.speed);
-            break;
+            if (digitalRead(BTN_PAUSE) == LOW) {
+                delay(200); // anti-rebote
+                while (digitalRead(BTN_PAUSE) == LOW);
+                paused = !paused;
+
+                if (paused) {
+                    printf(">> Pausado\n");
+                    kill(espeak_pid, SIGSTOP); // Pausar proceso
+                } else {
+                    printf(">> Reanudado\n");
+                    kill(espeak_pid, SIGCONT); // Reanudar proceso
+                }
+            }
+
+            delay(100);
         }
     }
 
