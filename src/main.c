@@ -80,8 +80,8 @@ int main() {
         free_text(text, line_count);
 
         printf("\n=== FIN ===\n");
-        printf("BTN_REPEAT (GPIO25) → Repetir\n");
-        printf("BTN_RECONF (GPIO26) → Nueva configuración\n");
+        printf("BTN_REPEAT (GPIO25) → Repetir audio\n");
+        printf("BTN_RECONF (GPIO20) → Nuevo audio\n");
 
         repetir = 0;
         while (1) {
