@@ -73,8 +73,6 @@ void run_config_assistant(void) {
         break;
     }
 
-    printf("Usa BTN1 para cambiar idioma, BTN2 para velocidad, BTN3 para confirmar.\n");
-
     while (1) {
         system("clear");
         printf("\n=== Configuración para la reproducción ===\n");
