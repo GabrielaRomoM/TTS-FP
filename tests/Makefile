@@ -17,19 +17,19 @@ OBJS_conf_asst = $(SRC_DIR)/conf_asst.c
 all: $(BIN_DIR) $(TESTS)
 
 config_test: config_test.c $(OBJS_config) $(OBJS_conf_asst)
-  $(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^ -lwiringPi
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^ -lwiringPi
 
 loader_test: loader_test.c $(OBJS_loader) $(OBJS_config)
-  $(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^
 
 conv_tts_test: conv_tts_test.c $(OBJS_conv) $(OBJS_config)
-  $(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^
 
 playback_test: playback_test.c $(OBJS_conv)
-  $(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^ -lwiringPi
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^ -lwiringPi
 
 $(BIN_DIR):
-  mkdir -p $(BIN_DIR)
+	mkdir -p $(BIN_DIR)
 
 clean:
-  rm -rf $(BIN_DIR)
+	rm -rf $(BIN_DIR)
