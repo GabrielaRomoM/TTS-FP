@@ -81,7 +81,7 @@ int main() {
     fin_reproduccion:
         free_text(text, line_count);
 
-        printf("\n============== FIN DE REPRODUCCIÓN ==============\n");
+        printf("\n======================= FIN DE REPRODUCCIÓN =======================\n");
         printf("BTN_1: Repetir\n");
         printf("BTN_2: Nuevo archivo\n");
         printf("BTN_3: Salir\n");
@@ -117,6 +117,6 @@ int main() {
 
     } while (repetir);
 
-    printf("\n\nSaliendo...\n");
+    printf("\nSaliendo...\n");
     return 0;
 }
