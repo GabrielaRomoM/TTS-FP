@@ -25,7 +25,7 @@ int main() {
     Config config;
 
     if (load_config(&config) != 0) {
-        printf("No se pudo cargar tts.conf. Ejecutando asistente...\n");
+        printf("Ejecutando asistente...\n");
         run_config_assistant();
         if (load_config(&config) != 0) {
             printf("Error crítico al leer la configuración.\n");
@@ -81,10 +81,10 @@ int main() {
     fin_reproduccion:
         free_text(text, line_count);
 
-        printf("\n=== FIN DE REPRODUCCIÓN ===\n");
-        printf("BTN_1 (GPIO17): Repetir\n");
-        printf("BTN_2 (GPIO27): Nuevo archivo/configuración\n");
-        printf("BTN_3 (GPIO22): Salir\n");
+        printf("\n====== FIN DE REPRODUCCIÓN ======\n");
+        printf("BTN_1: Repetir\n");
+        printf("BTN_2: Nuevo archivo\n");
+        printf("BTN_3: Salir\n");
 
         repetir = 0;
 
@@ -117,6 +117,6 @@ int main() {
 
     } while (repetir);
 
-    printf("Hasta luego.\n");
+    printf("Saliendo...\n");
     return 0;
 }
