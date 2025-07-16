@@ -47,7 +47,7 @@ void run_config_assistant(void) {
     int idioma_idx = 0;
     int speed_idx = 0;
 
-    printf("\n=========== Selección de archivo de texto ===========\n");
+    printf("\n================== Selección de archivo de texto ==================\n");
 
     // Bucle para solicitar archivo válido y no vacío
     while (1) {
@@ -75,7 +75,7 @@ void run_config_assistant(void) {
 
     while (1) {
         system("clear");
-        printf("\n========= Configuración para la reproducción ==========\n");
+        printf("\n=============== Configuración para la reproducción ================\n");
         printf("Archivo: %s\n", path);
         printf("Idioma: %s\n", idiomas_mostrar[idioma_idx]);
         printf("Velocidad: %d\n", speeds[speed_idx]);
