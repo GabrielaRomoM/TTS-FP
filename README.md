@@ -14,6 +14,13 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 - Desarrollar un sistema de lectura de texto a voz (TTS) sobre una Raspberry Pi utilizando Linux, que permita convertir archivos de texto en audio de forma local
   mediante `espeak`, integrando control por botones físicos a través de GPIO y aplicando una arquitectura modular en lenguaje C que facilite su extensión, mantenimiento e interacción por consola.
 
-## Requisitos Previos:
+## Estructura del proyecto:
 ### Hardware:
-### Paquetes de Instalación:
+- Raspberry Pi Zero 2W
+- Módulo UDA1334A I2S DAC
+- 3 Botones pulsadores de 4 pines
+### Conexiones:
+### Implementación Física: 
+### Software:
+#### Paquetes de Instalación:
+
