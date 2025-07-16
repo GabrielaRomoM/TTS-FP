@@ -48,8 +48,30 @@ void run_config_assistant(void) {
     int speed_idx = 0;
 
     printf("\n=== Asistente de configuración ===\n");
-    printf("Ingrese el nombre o ruta del archivo .txt: ");
-    scanf(" %255[^\n]", path);
+
+    // Bucle para solicitar archivo válido y no vacío
+    while (1) {
+        printf("Ingrese el nombre o ruta del archivo .txt: ");
+        scanf(" %255[^\n]", path);
+
+        FILE *test = fopen(path, "r");
+        if (!test) {
+            printf("El archivo no existe o no se puede abrir. Intente nuevamente.\n");
+            continue;
+        }
+
+        // Verificar si está vacío
+        int c = fgetc(test);
+        if (c == EOF) {
+            printf("El archivo está vacío. Intente con otro archivo.\n");
+            fclose(test);
+            continue;
+        }
+
+        // Archivo válido y no vacío
+        fclose(test);
+        break;
+    }
 
     printf("Usa BTN1 para cambiar idioma, BTN2 para velocidad, BTN3 para confirmar.\n");
 
