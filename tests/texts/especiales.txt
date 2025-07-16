@@ -1,0 +1,6 @@
+Hola, mundo
+Línea con acentos: á é í ó ú
+Caracteres especiales: ñ Ñ ç ü ¡ ¿
+Símbolos: @ # $ % & * ( ) { } [ ] < > ~ ^
+Combinación de idiomas: mañana, niño, français, über, façade
+Emoji UTF-8 (si tu entorno los soporta): 😀 🐍 🔊 🚀
