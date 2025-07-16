@@ -47,7 +47,7 @@ void run_config_assistant(void) {
     int idioma_idx = 0;
     int speed_idx = 0;
 
-    printf("\n=== Asistente de configuración ===\n");
+    printf("\n====== Selección de archivo de texto ======\n");
 
     // Bucle para solicitar archivo válido y no vacío
     while (1) {
@@ -77,11 +77,11 @@ void run_config_assistant(void) {
 
     while (1) {
         system("clear");
-        printf("\n=== Asistente de configuración ===\n");
+        printf("\n=== Configuración para la reproducción ===\n");
         printf("Archivo: %s\n", path);
         printf("Idioma: %s\n", idiomas_mostrar[idioma_idx]);
         printf("Velocidad: %d\n", speeds[speed_idx]);
-        printf("Presiona BTN3 para guardar configuración.\n");
+        printf("Presiona el BTN3 para guardar configuración.\n");
 
         int btn = wait_for_button_press();
 
@@ -98,7 +98,8 @@ void run_config_assistant(void) {
     if (file) {
         fprintf(file, "path=%s\nlanguage=%s\nspeed=%d\n", path, idiomas[idioma_idx], speeds[speed_idx]);
         fclose(file);
-        printf("\nConfiguración guardada exitosamente.\n");
+        printf("\nConfiguración guardada.\n");
+        printf("\nReproduciendo...")
     } else {
         perror("Error al guardar configuración");
     }
