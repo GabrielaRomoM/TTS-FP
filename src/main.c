@@ -57,6 +57,7 @@ int main() {
             while (is_speaking()) {
                 if (digitalRead(BTN_2) == LOW) {  // Detener
                     stop_speech();
+                    esperar_suelta(BTN_2);  // << CORRECCIÓN AQUÍ
                     printf(">> Reproducción detenida\n");
                     goto fin_reproduccion;
                 }
