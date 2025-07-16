@@ -10,6 +10,13 @@ int main() {
         return 1;
     }
 
+    FILE *f = fopen(cfg.path, "r");
+    if (!f) {
+        printf("❌ Archivo no encontrado: %s\n", cfg.path);
+        return 1;
+    }
+    fclose(f);
+
     int count = 0;
     char **lines = load_text(cfg.path, &count);
     if (!lines || count == 0) {
