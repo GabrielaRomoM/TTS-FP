@@ -20,13 +20,16 @@ int main() {
     speak_line("Probando reproducción pausada y reanudada", "mb-es2", 150);
 
     int paused = 0;
+    int pausa_count = 0;
+
     while (is_speaking()) {
         if (digitalRead(BTN_1) == LOW) {
             esperar_suelta(BTN_1);
             paused = !paused;
             if (paused) {
                 kill(espeak_pid, SIGSTOP);
-                printf("\n>> Pausado\n");
+                pausa_count++;
+                printf("\n>> Pausado (%d)\n", pausa_count);
             } else {
                 kill(espeak_pid, SIGCONT);
                 printf("\n>> Reanudado\n");
@@ -35,6 +38,6 @@ int main() {
         usleep(100000);
     }
 
-    printf("✅ playback_test passed\n");
+    printf("✅ playback_test passed (Total pausas: %d)\n", pausa_count);
     return 0;
 }
