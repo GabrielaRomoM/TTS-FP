@@ -96,8 +96,7 @@ void run_config_assistant(void) {
     if (file) {
         fprintf(file, "path=%s\nlanguage=%s\nspeed=%d\n", path, idiomas[idioma_idx], speeds[speed_idx]);
         fclose(file);
-        printf("\nConfiguración guardada.\n");
-        printf("\nReproduciendo...");
+        printf("\nConfiguración guardada.\nReproduciendo...");
     } else {
         perror("Error al guardar configuración");
     }
