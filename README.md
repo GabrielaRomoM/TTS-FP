@@ -20,22 +20,45 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 - Módulo UDA1334A I2S DAC
 - 3 Botones pulsadores de 4 pines
 ### Conexiones:
+
 <img width="1168" height="899" alt="image" src="https://github.com/user-attachments/assets/289b1aa4-8430-4fe4-aac7-8efd559758b6" />
+
+
+- MÓDULO UDA13334A I2S DAC
+
+VIN → 5V
+GND → GND
+→ GPIO19
+DIN → GPIO21
+→ GND
+
+- PULSADORES DE 4 PINES
+
+Botón #1 → GPIO17
+Botón #2 → GPIO27
+Botón #3 → GPIO22
+GND → GND (Se comparte la conexión para los tres botones)
 
 
 ### Implementación Física: 
 
+
 <img width="486" height="561" alt="image" src="https://github.com/user-attachments/assets/1a8b0779-160f-4a57-bd70-83069137b761" />
 
+
 ### Software:
-.
+
 #### Paquetes de Instalación:
 
+(Aquí lo que hay que instalar antes de clonar el repositorio)
+
 - Clonar el repositorio:
+  
 
 ```bash
 git clone https://github.com/GabrielaRomoM/TTS-FP.git
 ```
+
 <img width="814" height="180" alt="image" src="https://github.com/user-attachments/assets/04013d92-8d61-4203-a7a3-707d754ee456" />
 
 
@@ -43,31 +66,41 @@ git clone https://github.com/GabrielaRomoM/TTS-FP.git
 
 El repositorio clonado con exito tiene la siguiente estructura:
 
+
 <img width="538" height="769" alt="image" src="https://github.com/user-attachments/assets/f8708e53-9399-4d41-8f47-789361d909e1" />
 
 
+
 La compilación del sistema se realiza mediante el Makefile de la siguiente forma:
+
 
 ```bash
 make all
 ```
 
+
 Obteniendo como estructura del sistema: 
+
 
 <img width="537" height="787" alt="image" src="https://github.com/user-attachments/assets/5b7c90b2-817e-443d-830b-e43901b7abd1" />
 
+
 El programa se ejecuta usando:
+
 ```bash
 ./bin/main
 ```
 
 ## Funciones:
+
 1. El programa inicialmente mostrará una interfaz sencilla solicitando una ruta de texto. Dicha ruta de texto debe seguir el siguiente formato:
    
    ```bash
     texts/archivo.txt
    ```
+   
    En caso de colocar una ruta invalida, se muestra el siguiente mensaje:
+   
    
    <img width="622" height="67" alt="image" src="https://github.com/user-attachments/assets/9406059b-680b-46aa-9aeb-a0fe0e74264b" />
 
@@ -77,6 +110,7 @@ El programa se ejecuta usando:
    **NOTA:** Esta versión cuenta con una carpeta de textos (en formato `.txt`) que pueden ser utilizados para poner en funcionamiento el sistema,
    cuenta con dos textos en español (esuno.txt, esdos.txt), dos textos en inglés (enone.txt, entwo.txt), un texto con cáracteres especiales (especiales.txt)
    y un archivo vacio para ver como se comporta el sistema (vacio.txt).
+   
    <img width="493" height="201" alt="image" src="https://github.com/user-attachments/assets/3b138360-ebfd-4a8a-b665-71fd80567cb5" />
 
 3. Una vez se valida la ruta del texto, se permite configurar dos párametros (idioma y velocidad). Por defecto, estos dos párametros se van a registrar en:
@@ -111,9 +145,15 @@ El programa se ejecuta usando:
 
 
 
-6. Para salir completamente del sistema y desinstalarlo se ejecuta el siguiente comando:
+6. Para salir de la ejecución se presiona el botón #3:
    
    <img width="708" height="120" alt="image" src="https://github.com/user-attachments/assets/a0060321-7fec-4676-8d9d-ab4c5a6aaa95" />
+
+7. Para desinstalar el sistema y borrar los ejecutables se ejecuta el siguiente comando:
+
+    ```bash
+    make clean
+   ```  
 
 
 ## Detalles:
