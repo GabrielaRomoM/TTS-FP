@@ -29,8 +29,12 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 #### Paquetes de Instalación:
 
 - Clonar el repositorio:
-  
-.
+
+```bash
+git clone https://github.com/GabrielaRomoM/TTS-FP.git
+```
+<img width="814" height="180" alt="image" src="https://github.com/user-attachments/assets/04013d92-8d61-4203-a7a3-707d754ee456" />
+
 
 ## Ejecución:
 
