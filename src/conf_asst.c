@@ -4,19 +4,24 @@
 #include <stdlib.h>
 #include "conf_asst.h"
 
+// Definición de pines de botones físicos usando wiringPi
 #define BTN1 0  // GPIO17 
 #define BTN2 2  // GPIO27 
 #define BTN3 3  // GPIO22 
 
+// Idiomas disponibles para reproducción TTS
 const char* idiomas[] = {"mb-es2", "mb-en1"};
 const char* idiomas_mostrar[] = {"Español", "Inglés"};
+
+// Velocidades disponibles en palabras por minuto
 int speeds[] = {100, 125, 150, 175, 200};
 
+// Espera activa hasta que uno de los botones se presione
 int wait_for_button_press() {
     while (1) {
         if (digitalRead(BTN1) == LOW) {
             delay(50);
-            while (digitalRead(BTN1) == LOW);
+            while (digitalRead(BTN1) == LOW); // espera a que se suelte
             return BTN1;
         }
         if (digitalRead(BTN2) == LOW) {
@@ -33,9 +38,11 @@ int wait_for_button_press() {
     }
 }
 
+// Asistente para configurar el archivo, idioma y velocidad de lectura
 void run_config_assistant(void) {
     wiringPiSetup();
 
+    // Configuración de pines como entrada con resistencias pull-up
     pinMode(BTN1, INPUT);
     pinMode(BTN2, INPUT);
     pinMode(BTN3, INPUT);
@@ -43,7 +50,7 @@ void run_config_assistant(void) {
     pullUpDnControl(BTN2, PUD_UP);
     pullUpDnControl(BTN3, PUD_UP);
 
-    char path[256];
+    char path[256]; // Ruta al archivo
     int idioma_idx = 0;
     int speed_idx = 0;
 
@@ -73,6 +80,7 @@ void run_config_assistant(void) {
         break;
     }
 
+    // Menú de configuración con botones
     while (1) {
         system("clear");
         printf("\n=============== Configuración para la reproducción ================\n");
@@ -84,14 +92,15 @@ void run_config_assistant(void) {
         int btn = wait_for_button_press();
 
         if (btn == BTN1) {
-            idioma_idx = 1 - idioma_idx;
+            idioma_idx = 1 - idioma_idx; // Alterna entre 0 y 1
         } else if (btn == BTN2) {
-            speed_idx = (speed_idx + 1) % 5;
+            speed_idx = (speed_idx + 1) % 5; // Cicla entre 5 valores
         } else if (btn == BTN3) {
-            break;
+            break; // Guardar configuración
         }
     }
 
+    // Guarda la configuración en un archivo
     FILE *file = fopen("tts.conf", "w");
     if (file) {
         fprintf(file, "path=%s\nlanguage=%s\nspeed=%d\n", path, idiomas[idioma_idx], speeds[speed_idx]);
