@@ -27,16 +27,23 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 - MÓDULO UDA13334A I2S DAC
 
 VIN → 5V
+
 GND → GND
+
 WSEL → GPIO19
+
 DIN → GPIO21
+
 BCLK → GND
 
 - PULSADORES DE 4 PINES
 
 Botón #1 → GPIO17
+
 Botón #2 → GPIO27
+
 Botón #3 → GPIO22
+
 GND → GND (Se comparte la conexión para los tres botones)
 
 
