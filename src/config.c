@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include "config.h"
 
+// Carga los valores desde el archivo tts.conf
 int load_config(Config *config) {
     FILE *file = fopen("tts.conf", "r");
     if (!file) return -1;
 
+    // Lee línea por línea y almacena de acuerdo a la clave
     char key[32], value[256];
     while (fscanf(file, "%31[^=]=%255[^\n]\n", key, value) != EOF) {
         if (strcmp(key, "path") == 0)
