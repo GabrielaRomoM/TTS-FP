@@ -38,4 +38,28 @@ Este bloque se encarga de leer el archivo de configuración generado por el asis
   Implementa la función `load_config()` para cargar el archivo de configuración `tts.conf` y llenar la estructura `Config`.
 
 
+### **- Bloque conv_tts:**
+Este bloque controla la reproducción de texto en voz utilizando el programa `espeak`.
+
+- `conv_tts.h`
+  - Declara las funciones `speak_line()`, `is_speaking()` y `stop_speech()`.
+  - Declara la variable `espeak_pid` para controlar el subproceso que ejecuta `espeak`.
+
+- `conv_tts.c`
+  - Usa `fork()` y `execlp()` para llamar a `espeak` con los parámetros correspondientes.
+  - Permite verificar si aún está hablando (`is_speaking()`).
+  - Permite interrumpir la lectura en curso (`stop_speech()`), usando `SIGKILL`.
+
+### **- Bloque loader:"
+Este bloque carga el contenido del archivo `.txt` línea por línea en memoria para su posterior lectura en voz.
+
+- `loader.h`
+  Declara las funciones `load_text()` y `free_text()`.
+- `loader.c`
+  - Implementa la lectura del archivo línea por línea, almacenándolas en memoria dinámica con `load_text()`.
+  - Libera la memoria utilizada tras la reproducción con la función `free_text()`.
+
+
+
+
 
