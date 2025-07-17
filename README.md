@@ -28,9 +28,9 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 
 VIN → 5V
 GND → GND
-→ GPIO19
+WSEL → GPIO19
 DIN → GPIO21
-→ GND
+BCLK → GND
 
 - PULSADORES DE 4 PINES
 
@@ -166,6 +166,4 @@ El programa se ejecuta usando:
 
 ## Matriz de Requerimientos:
 
-![Matriz de Requerimientos](https://github.com/user-attachments/assets/e15c0edd-7d66-4937-bb2a-05a32c0ed0fe)
-
-   
+![Matriz de Requerimientos](https://github.com/user-attachments/assets/bffd4cec-3126-4d18-a145-fd365aa696a5)
