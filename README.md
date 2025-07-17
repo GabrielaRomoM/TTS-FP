@@ -20,7 +20,9 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 - Módulo UDA1334A I2S DAC
 - 3 Botones pulsadores de 4 pines
 ### Conexiones:
-.
+<img width="1168" height="899" alt="image" src="https://github.com/user-attachments/assets/289b1aa4-8430-4fe4-aac7-8efd559758b6" />
+
+
 ### Implementación Física: 
 ### Software:
 .
