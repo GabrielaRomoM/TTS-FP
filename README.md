@@ -24,6 +24,9 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 
 
 ### Implementación Física: 
+
+<img width="486" height="561" alt="image" src="https://github.com/user-attachments/assets/1a8b0779-160f-4a57-bd70-83069137b761" />
+
 ### Software:
 .
 #### Paquetes de Instalación:
