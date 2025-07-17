@@ -50,7 +50,7 @@ Este bloque controla la reproducción de texto en voz utilizando el programa `es
   - Permite verificar si aún está hablando (`is_speaking()`).
   - Permite interrumpir la lectura en curso (`stop_speech()`), usando `SIGKILL`.
 
-### **- Bloque loader:"
+### **- Bloque loader:**
 Este bloque carga el contenido del archivo `.txt` línea por línea en memoria para su posterior lectura en voz.
 
 - `loader.h`
@@ -59,7 +59,9 @@ Este bloque carga el contenido del archivo `.txt` línea por línea en memoria p
   - Implementa la lectura del archivo línea por línea, almacenándolas en memoria dinámica con `load_text()`.
   - Libera la memoria utilizada tras la reproducción con la función `free_text()`.
 
-
-
-
-
+### **- Bloque main:**
+Este es el programa principal, que:
+- Verifica la existencia de un archivo de configuración (`tts.conf`) al iniciar. Si no existe o es inválido, ejecuta el asistente.
+- Carga el contenido del archivo `.txt` seleccionado.
+- Reproduce línea por línea utilizando `espeak`.
+- Permite pausar/reanudar la lectura (`BTN\_1`), detener la reproducción (`BTN\_2`), repetir, cambiar configuración o salir (`BTN\_3`), mediante interacción con botones físicos.
