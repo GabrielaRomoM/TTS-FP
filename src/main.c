@@ -11,11 +11,12 @@ extern pid_t espeak_pid;
 extern int is_speaking(void);
 extern void stop_speech(void);
 
-// Pines físicos según tu asignación
+// Pines físicos asignados
 #define BTN_1 0  // GPIO17 - wiringPi 0
 #define BTN_2 2  // GPIO27 - wiringPi 2
 #define BTN_3 3  // GPIO22 - wiringPi 3
 
+// Espera a que el botón se suelte
 void esperar_suelta(int pin) {
     delay(200);
     while (digitalRead(pin) == LOW);
@@ -24,6 +25,7 @@ void esperar_suelta(int pin) {
 int main() {
     Config config;
 
+    // Carga configuración, si falla ejecuta asistente
     if (load_config(&config) != 0) {
         printf("Ejecutando asistente...\n");
         run_config_assistant();
@@ -34,6 +36,8 @@ int main() {
     }
 
     wiringPiSetup();
+
+    // Configura pines de botones
     pinMode(BTN_1, INPUT);
     pinMode(BTN_2, INPUT);
     pinMode(BTN_3, INPUT);
@@ -52,6 +56,7 @@ int main() {
             return 1;
         }
 
+        // Lee y reproduce línea por línea
         for (int i = 0; i < line_count; ++i) {
             speak_line(text[i], config.language, config.speed);
             while (is_speaking()) {
@@ -67,10 +72,10 @@ int main() {
                     paused = !paused;
                     if (paused) {
                         printf(">> Pausado\n");
-                        kill(espeak_pid, SIGSTOP);
+                        kill(espeak_pid, SIGSTOP); // Pausa el subproceso de espeak
                     } else {
                         printf(">> Reanudado\n");
-                        kill(espeak_pid, SIGCONT);
+                        kill(espeak_pid, SIGCONT); // Reanuda el subproceso pausado
                     }
                 }
 
