@@ -27,3 +27,15 @@ un idioma de lectura y una velocidad utilizando tres botones físicos.
    - Guarda las preferencias en un archivo de configuración (`tts.conf`).
 
 ### **- Bloque config:**
+Este bloque se encarga de leer el archivo de configuración generado por el asistente (`tts.conf`).
+
+- `config.h`
+  Define la estructura `Config` que contiene:
+  - Ruta del archivo (por ejemplo: `texts/esuno.txt`)
+  - Idioma (por ejemplo: `mb-es2`)
+  - Velocidad de lectura 
+- `config.c`
+  Implementa la función `load_config()` para cargar el archivo de configuración `tts.conf` y llenar la estructura `Config`.
+
+
+
