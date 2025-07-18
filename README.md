@@ -57,6 +57,7 @@ GND → GND (Se comparte la conexión para los tres botones)
 Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspberry Pi Zero 2 W), usando botones físicos conectados a pines GPIO y sintetizador de voz eSpeak.
 #### Paquetes de Instalación:
 1. wiringPi
+
    Biblioteca para manejo de GPIO en C.
    Si no está instalada, puede instalarla desde la terminal usando:
    
@@ -73,7 +74,8 @@ Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspbe
    ./build
    ```
 
-2. espeak
+3. espeak
+
    Motor TTS (Text-To-Speech) que permite leer texto en voz alta.
 
     ```bash
@@ -86,8 +88,9 @@ Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspbe
    sudo apt install build-essential
    ```
    
-3. mbrola
-   es un motor de síntesis de voz que trabaja junto con otros programas como eSpeak para generar voces más naturales y menos robóticas que las voces por defecto.
+5. mbrola
+
+   Es un motor de síntesis de voz que trabaja junto con otros programas como eSpeak para generar voces más naturales y menos robóticas que las voces por defecto.
    Para descargar e instalar manualmente mbrola compatible con Raspberry Pi OS se usa:
 
    ```bash
