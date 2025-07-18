@@ -54,23 +54,56 @@ GND → GND (Se comparte la conexión para los tres botones)
 
 
 ### Software:
-
+Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspberry Pi Zero 2 W), usando botones físicos conectados a pines GPIO y sintetizador de voz eSpeak.
 #### Paquetes de Instalación:
+1. wiringPi
+   Biblioteca para manejo de GPIO en C.
+   Si no está instalada, puede instalarla desde la terminal usando:
+   
+   ```bash
+   sudo apt update
+   sudo apt install wiringpi
+   ```
 
-Descargar e instalar manualmente mbrola compatible con Raspberry Pi OS.
-```bash
-sudo apt install ./mbrola_3.3+dfsg-4+deb11u1_armhf.deb
-```
-Esto instalará mbrola en el sistema para descargar las diferentes voces.
+   También puede clonar e instalar manualmente:
 
-```bash
-sudo apt install mbrola-es1 mbrola-es2 mbrola-es3 mbrola-us1 mbrola-us2 mbrola-us3
-```
-Verificar que se instalaron:
+   ```bash
+   git clone https://github.com/WiringPi/WiringPi.git
+   cd WiringPi
+   ./build
+   ```
 
-```bash
-ls /usr/share/mbrola/
-```
+2. espeak
+   Motor TTS (Text-To-Speech) que permite leer texto en voz alta.
+
+    ```bash
+    sudo apt install espeak
+    ```
+
+   Para compilar el código fuente:
+
+   ```bash
+   sudo apt install build-essential
+   ```
+   
+3. mbrola
+   es un motor de síntesis de voz que trabaja junto con otros programas como eSpeak para generar voces más naturales y menos robóticas que las voces por defecto.
+   Para descargar e instalar manualmente mbrola compatible con Raspberry Pi OS se usa:
+
+   ```bash
+   sudo apt install ./mbrola_3.3+dfsg-4+deb11u1_armhf.deb
+   ```
+
+   Esto instalará mbrola en el sistema para descargar las diferentes voces.
+
+   ```bash
+   sudo apt install mbrola-es1 mbrola-es2 mbrola-es3 mbrola-us1 mbrola-us2 mbrola-us3
+   ```
+
+   Verificar que se instalaron:
+   ```bash
+   ls /usr/share/mbrola/
+   ```
 
 - Clonar el repositorio:
   
