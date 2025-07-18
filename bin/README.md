@@ -1,40 +1,28 @@
 # **Carpeta bin/**
 
-Esta carpeta contiene los archivos ejecutables generados tras compilar las pruebas del proyecto. Cada binario permite validar una funcionalidad específica del sistema.
+Esta carpeta contiene el archivo binario principal del proyecto **TTS-FP**.
 
-## Contenido de la carpeta:
+## Archivo incluido
 
-- `config_test`
-  - Ejecutable que verifica que el archivo de configuración `tts.conf` sea válido.
-  - Revisa el idioma, la velocidad y la existencia del archivo de texto indicado.
+- `main`: Ejecutable principal del sistema TTS.
 
-  ```bash
-  ./config_test
-  ```
+## Cómo ejecutar
 
-- `loader_test`
-  - Carga el archivo de texto indicado en la configuración y verifica que pueda ser leído correctamente.
-  - Detecta si contiene caracteres especiales (acentos, emojis, etc.).
+Desde el directorio raíz del proyecto:
 
-  ```bash
-  ./loader_test
-  ```
+```bash
+./bin/main
+```
+## Nota
 
-- `conv_tts_test`
-  - Inicia la conversión de texto a voz mediante `espeak`, usando la primera línea del texto.
-  - La función lanza un subproceso que se monitorea hasta que finaliza la reproducción.
+Este archivo es generado automáticamente al compilar con:
 
-  ```bash
-  ./conv_tts_test
-  ```
+```bash
+make all
+```
 
-- `playback_test`
-  - Prueba la capacidad de pausar y reanudar la lectura de voz mediante un botón físico conectado al GPIO.
+y es eliminado al ejecutar:
 
-  ```bash
-  ./playback_test
-  ```
-
-**NOTAS:**
-- Todos los ejecutables dependen del archivo `tts.conf` ubicado en la raíz del proyecto.
-- No olvidar la compilación con `make all` antes de ejecutar cualquier prueba.
+```bash
+make clean
+```
