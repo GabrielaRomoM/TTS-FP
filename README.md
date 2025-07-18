@@ -57,7 +57,20 @@ GND → GND (Se comparte la conexión para los tres botones)
 
 #### Paquetes de Instalación:
 
-(Aquí lo que hay que instalar antes de clonar el repositorio)
+Descargar e instalar manualmente mbrola compatible con Raspberry Pi OS.
+```bash
+sudo apt install ./mbrola_3.3+dfsg-4+deb11u1_armhf.deb
+```
+Esto instalará mbrola en el sistema para descargar las diferentes voces.
+
+```bash
+sudo apt install mbrola-es1 mbrola-es2 mbrola-es3 mbrola-us1 mbrola-us2 mbrola-us3
+```
+Verificar que se instalaron:
+
+```bash
+ls /usr/share/mbrola/
+```
 
 - Clonar el repositorio:
   
