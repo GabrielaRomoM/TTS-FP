@@ -10,7 +10,7 @@
 #define BTN3 3  // GPIO22 
 
 // Idiomas disponibles para reproducción TTS
-const char* idiomas[] = {"mb-es2", "mb-en1"};
+const char* idiomas[] = {"mb-es2", "mb-us2"};
 const char* idiomas_mostrar[] = {"Español", "Inglés"};
 
 // Velocidades disponibles en palabras por minuto
