@@ -202,7 +202,7 @@ El programa se ejecuta usando:
    
    <img width="708" height="120" alt="image" src="https://github.com/user-attachments/assets/a0060321-7fec-4676-8d9d-ab4c5a6aaa95" />
 
-7. Para desinstalar el sistema y borrar los ejecutables se ejecuta el siguiente comando:
+7. Para desinstalar el sistema y borrar el ejecutable creado con la compilación se digita el siguiente comando:
 
     ```bash
     make clean
