@@ -74,7 +74,7 @@ Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspbe
    ./build
    ```
 
-3. espeak
+2. espeak
 
    Motor TTS (Text-To-Speech) que permite leer texto en voz alta.
 
@@ -88,7 +88,7 @@ Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspbe
    sudo apt install build-essential
    ```
    
-5. mbrola
+3. mbrola
 
    Es un motor de síntesis de voz que trabaja junto con otros programas como eSpeak para generar voces más naturales y menos robóticas que las voces por defecto.
    Para descargar e instalar manualmente mbrola compatible con Raspberry Pi OS se usa:
@@ -107,6 +107,38 @@ Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspbe
    ```bash
    ls /usr/share/mbrola/
    ```
+4. Habilitar I2S en la raspberry pi
+
+   Abrir el archivo de configuración del sistema:
+
+   ```bash
+   sudo nano /boot/config.txt
+   ```
+
+   Agrega depués de estas líneas para habilitar el bus I2S y configurar el DAC:
+   
+   ```bash
+   # Disable compensation for displays with overscan
+   ```
+
+   ```bash
+   dtparam=i2s=on
+   dtoverlay=hifiberry-dac
+   ```
+
+   Reiniciar la Raspberry Pi
+
+   ```bash
+   sudo reboot
+   ```
+
+   Verificar que I2S esté habilitado:
+
+   ```bash
+   aplay -l
+   ```
+
+   
 
 - Clonar el repositorio:
   
