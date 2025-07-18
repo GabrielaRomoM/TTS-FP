@@ -5,4 +5,4 @@ Los cientificos creen que las celulas cerebrales llamadas neuronas primero trans
 Luego, estas imagenes se envian al hipocampo y se almacenan temporalmente en la memoria a corto plazo.
 En el hipocampo se organiza la informacion, y es durante este proceso que se desvanecen partes de la imagen de nuestra experiencia.
 Finalmente, cierta informacion se transfiere a la memoria a largo plazo en una seccion del lobulo frontal del cerebro conocida como corteza cerebral.
-Los cientificos creen que este proceso puede ocurrir mientras dormimos, pero es un misterio cómo se transfiere exactamente la informacion de un area del cerebro a otra.
+Los cientificos creen que este proceso puede ocurrir mientras dormimos, pero es un misterio como se transfiere exactamente la informacion de un area del cerebro a otra.

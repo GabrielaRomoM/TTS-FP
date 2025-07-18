@@ -6,5 +6,5 @@ all:
 	$(CC) $(CFLAGS) -o bin/main $(SRC) -lwiringPi
 
 clean:
-	rm -f bin/*
-	rm tts.conf
+	find bin -type f ! -name 'README.md' -exec rm -f {} +
+	rm -f tts.conf
