@@ -91,7 +91,74 @@ Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspbe
    sudo apt install build-essential
    ```
    
-3. mbrola
+   ### 2.1 Funcionamiento de motor espeak
+ 
+   Es un motor de texto a voz (TTS, Text-to-Speech) ligero y de código abierto que convierte texto escrito en habla sintetizada. Fue escrito originalmente en C y utiliza su propio enfoque de síntesis     
+   basado en formantes. Los formantes son picos de energía en la voz humana que definen cómo suena una vocal o consonante. Espeak sintetiza la voz mediante el modelado de estos formantes, sin usar 
+   grabaciones reales. Convirtiendo las palabras a fonemas: unidades sonoras básicas del lenguaje (por ejemplo, el sonido "a", "k", "s").
+
+   - Estructura modular de código fuente en C:
+     
+     - `voice.c` y `speak_lib.c` → manejo de voz y configuración
+     - `synthdata.c` → definiciones de fonemas y parámetros acústicos
+     - `intonation.c` → reglas para acentos, pausas, énfasis
+     - `phonemelist.h` → mapeo de fonemas a sonidos formantes
+     
+       Repositorio con toda la información del código fuente: [Repositorio oficial de espeak-ng en GitHub](https://github.com/espeak-ng/espeak-ng)
+
+     - Ejemplo:
+
+       1. Entrada de texto
+          
+          El usuario proporciona una cadena de texto:
+
+          ```bash
+          espeak "Hello world"
+          ```
+
+        2. Análisis lingüístico
+
+           `Objetivo`: Convertir el texto escrito en una representación fonética (fonemas), usando reglas de pronunciación específicas del idioma.
+
+           #### ¿Cómo lo hace?
+
+           - Detecta el idioma (por defecto inglés o el que configures).
+           - Divide el texto en palabras, frases y signos de puntuación.
+           - Aplica reglas gramaticales y léxicas desde los archivos como:
+          
+             - `dictsource/` → Diccionario fonético
+             - `rules/` → Reglas gramaticales y prosódicas
+               Internamente traduce:
+               
+               ```bash
+               "Hello" → /h/ /ə/ /l/ /oʊ/
+               ```
+
+          3. Fonemas → parámetros acústicos
+      
+             Cada fonema se convierte en una estructura con:
+
+             - Duración
+             - Tono (pitch)
+             - Frecuencias formantes (F1, F2, F3…)
+             - Amplitud
+             - Transición con fonemas vecinos
+
+               Un formante es un pico de energía en ciertas frecuencias de la voz humana, importante para distinguir vocales.
+
+          4. Síntesis formántica (formant synthesis)
+
+             eSpeak no reproduce grabaciones humanas, sino que sintetiza sonido usando un modelo matemático de la voz.
+
+             - Cada fonema tiene una representación como suma de ondas senoidales (una por cada formante):
+            
+               ```bash
+               output_sample = A1*sin(2πF1t) + A2*sin(2πF2t) + A3*sin(2πF3t)
+               ```
+             - Cambia en el tiempo para simular transiciones naturales (coarticulación).
+             - Aplica modulación para ritmo, acento, emoción.
+   
+4. mbrola
 
    Es un motor de síntesis de voz que trabaja junto con otros programas como eSpeak para generar voces más naturales y menos robóticas que las voces por defecto.
    Para descargar e instalar manualmente mbrola compatible con Raspberry Pi OS se usa:
@@ -110,7 +177,7 @@ Este proyecto está diseñado para ejecutarse en Raspberry Pi (probado en Raspbe
    ```bash
    ls /usr/share/mbrola/
    ```
-4. Habilitar I2S en la raspberry pi
+5. Habilitar I2S en la raspberry pi
 
    Abrir el archivo de configuración del sistema:
 
