@@ -18,6 +18,9 @@ cuenta con una arquitectura modular que permite la carga dinámica de textos des
 ### Hardware:
 - Raspberry Pi Zero 2W
 - Módulo UDA1334A I2S DAC
+    - Chip UDA1334ATS: es un convertidor digital-analógico (DAC) estéreo I2S de baja potencia. Se utiliza para convertir señales de audio digitales en señales de audio analógicas, y es comúnmente utilizado       en sistemas de audio y aplicaciones integradas. Información técnica:
+      [Datasheet UDA1334ATS](https://cdn-shop.adafruit.com/product-files/3678/UDA1334ATS.pdf)
+      
 - 3 Botones pulsadores de 4 pines
 ### Conexiones:
 
